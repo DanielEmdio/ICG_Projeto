@@ -14,6 +14,7 @@ import { Matrix4 , Vector3 } from 'three'
 import { updateShip } from '../controls'
 import { Quaternion } from 'three'
 
+
 const x = new Vector3(1, 0, 0)
 const y = new Vector3(0, 1, 0)
 const z = new Vector3(0, 0, 1)
@@ -63,6 +64,7 @@ export function Ship(props) {
         new Matrix4().makeTranslation(0, 0.015 ,1)
       )
       
+    
     camera.matrixAutoUpdate = false;
     camera.matrix.copy(cameraMatrix);
     camera.matrixWorldNeedsUpdate = true;

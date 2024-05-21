@@ -10,12 +10,14 @@ Title: Space Station 3
 import React, { useRef } from 'react'
 import { useGLTF, useAnimations } from '@react-three/drei'
 
+
 export function Space(props) {
   const group = useRef()
   const { nodes, materials, animations } = useGLTF('assets/models/space_station_3.glb')
   const { actions } = useAnimations(animations, group)
+
   return (
-    <group ref={group} {...props} dispose={null}>
+    <group  {...props} dispose={null}>
       <group name="Sketchfab_Scene">
         <group name="Sketchfab_model" rotation={[-2.044, -0.213, -0.061]} scale={2.701}>
           <group name="root">

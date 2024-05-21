@@ -1,5 +1,5 @@
 import { useFrame } from "@react-three/fiber";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Quaternion, TorusGeometry, Vector3 } from "three";
 import { mergeBufferGeometries } from "three-stdlib";
 import { shipPosition } from "./Space_ship";
@@ -16,11 +16,11 @@ function randomPoint(scale) {
 const TARGET_RAD = 5;
 
 
-export function Targets() {
-  const [targets, setTargets] = useState(() => {
+export function Targets({ targets, setTargets }) {
+  useEffect(() => {
     const arr = [];
 
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 10; i++) {
       arr.push({
         center: randomPoint(new Vector3(60, 30, 60)).add(
           new Vector3(1, -11 + Math.random() * 2, -10)
@@ -29,8 +29,8 @@ export function Targets() {
       });
     }
 
-    return arr;
-  });
+    setTargets(arr);
+  }, []);
 
   const geometry = useMemo(() => {
     let geo;
@@ -75,9 +75,11 @@ export function Targets() {
   const map = useTexture('assets/textures/orange.png')  
 
   return (
-    <mesh geometry={geometry}>
-      <meshStandardMaterial roughness={0.5} metalness={0.5} />
-      <meshBasicMaterial map = {map}/>
-    </mesh>
+    geometry && (
+      <mesh geometry={geometry}>
+        <meshStandardMaterial roughness={0.5} metalness={0.5} />
+        <meshBasicMaterial map = {map}/>
+      </mesh>
+    )
   );
 }
